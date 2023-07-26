@@ -55,12 +55,15 @@ module.exports = {
         ],
       },
       {
-        test: /\.(?:js|mjs|cjs)$/,
+        test: /\.(?:js|mjs|cjs|jsx)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
-            presets: [['@babel/preset-env', { targets: 'defaults' }]],
+            presets: [
+              ['@babel/preset-env', { targets: 'defaults' }],
+              '@babel/preset-react',
+            ],
           },
         },
       },

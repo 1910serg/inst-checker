@@ -1,9 +1,22 @@
+import React from 'react';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+
 import '@babel/polyfill';
 
+import App from './App.jsx';
+
+// TODO: Удалить это
 import { mult, sum } from './modules/calc';
 
 import './index.html';
-import './index.scss';
+import './style/index.scss';
 
-console.log(mult(2, 4));
-console.log(sum(3, 4));
+const rootElement = document.getElementById('root');
+const root = createRoot(rootElement);
+
+root.render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
