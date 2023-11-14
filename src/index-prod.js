@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom/client';
 
 import '@babel/polyfill';
 
-import App from './App.js';
+import App from './App.jsx';
 
 // TODO: Удалить это
 import { mult, sum } from './modules/calc';
@@ -15,7 +15,7 @@ import './style/index.scss';
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
 
-root.render(
+root.hydrate(
   <StrictMode>
     <App />
   </StrictMode>

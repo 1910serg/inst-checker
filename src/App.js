@@ -1,6 +1,6 @@
 import React from 'react';
 
-const App = () => {
+export default function App() {
   return (
     <div>
       <h1>Inst-checker</h1>
@@ -9,6 +9,4 @@ const App = () => {
       </div>
     </div>
   );
-};
-
-export default App;
+}
