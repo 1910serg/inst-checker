@@ -1,11 +1,13 @@
-const fs = require('fs');
-const path = require('path');
+import { promises as fs } from 'fs';
+import path from 'path';
 
 const pageName = 'index';
 const _cache = new Map();
 
 /**
- * @returns {String} fileContent | cache
+ * Возвращает и устанавливает в кэш страницу html
+ *
+ * @returns {Promise<string>}
  */
 export async function readHtmlSource() {
   if (_cache.has(pageName)) {
@@ -13,7 +15,7 @@ export async function readHtmlSource() {
   }
 
   const fileContent = await fs.readFile(
-    path.resolve(__dirname, `index.html`),
+    path.resolve('build', 'index.html'),
     'utf8'
   );
 

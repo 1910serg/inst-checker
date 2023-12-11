@@ -1,8 +1,8 @@
-const express = require('express');
-const path = require('path');
+import express from 'express';
+import path from 'path';
 
-const { readHtmlSource } = require('./modules/read-html-source');
-const { renderApp } = require('./modules/render-app');
+import { readHtmlSource } from './modules/render-html';
+import { renderApp } from './modules/render-app';
 
 const app = express();
 const port = 3000;

@@ -4,13 +4,10 @@ import { createRoot } from 'react-dom/client';
 
 import '@babel/polyfill';
 
-import App from './App.js';
-
-// TODO: Удалить это
-import { mult, sum } from './modules/calc';
+import App from './components/App.js';
 
 import './index.html';
-import './style/index.scss';
+import '../style/index.scss';
 
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
