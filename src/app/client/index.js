@@ -17,3 +17,5 @@ root.render(
     <App />
   </StrictMode>
 );
+
+// Решить варнинг на сервере

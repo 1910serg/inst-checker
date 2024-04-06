@@ -1,8 +1,8 @@
 import express from 'express';
 import path from 'path';
 
-import { readHtmlSource } from './modules/render-html';
-import { renderApp } from './modules/render-app';
+import { readHtmlSource } from './lib/render-html';
+import { renderApp } from './lib/render-app';
 
 const app = express();
 const port = 3000;

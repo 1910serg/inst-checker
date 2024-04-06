@@ -4,7 +4,7 @@ module.exports = {
   target: 'node',
   mode: 'production',
   entry: {
-    server: path.resolve('src', 'server', 'index.js'),
+    server: path.resolve('src', 'app', 'server', 'index.js'),
   },
   output: {
     filename: '[name].js',
