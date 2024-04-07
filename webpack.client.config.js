@@ -7,12 +7,10 @@ const mode = process.env.NODE_ENV || 'development';
 const isDevMode = mode === 'development';
 
 const target = isDevMode ? 'web' : 'browserslist';
-const devtool = isDevMode ? 'source-map' : undefined;
 
 module.exports = {
   mode,
   target,
-  devtool,
   devServer: {
     port: 3000,
     open: true,
