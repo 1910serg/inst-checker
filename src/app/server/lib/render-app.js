@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 
-import App from '../../client/components/App';
+import App from '../../client/UI/App';
 
 /**
  * Возвращает строку с приложением

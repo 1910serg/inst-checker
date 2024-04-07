@@ -4,10 +4,10 @@ import { createRoot } from 'react-dom/client';
 
 import '@babel/polyfill';
 
-import App from './components/App.js';
+import App from './UI/App.js';
 
 import './index.html';
-import '../style/index.scss';
+import '../styles/index.scss';
 
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
