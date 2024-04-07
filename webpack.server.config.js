@@ -4,11 +4,11 @@ module.exports = {
   target: 'node',
   mode: 'production',
   entry: {
-    server: path.resolve('src', 'app', 'server', 'index.js'),
+    server: path.resolve(__dirname, 'src', 'app', 'server', 'index.js'),
   },
   output: {
     filename: '[name].js',
-    path: path.resolve('build'),
+    path: path.resolve(__dirname, 'build'),
   },
   module: {
     rules: [

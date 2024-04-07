@@ -18,10 +18,13 @@ module.exports = {
     open: true,
     hot: true,
   },
-  entry: ['@babel/polyfill', path.resolve('src', 'app', 'client', 'index.js')],
+  entry: [
+    '@babel/polyfill',
+    path.resolve(__dirname, 'src', 'app', 'client', 'index.js'),
+  ],
   output: {
     filename: 'server.js',
-    path: path.resolve('build'),
+    path: path.resolve(__dirname, 'build'),
     clean: true,
   },
   plugins: [
