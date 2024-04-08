@@ -30,7 +30,7 @@ module.exports = {
       template: path.resolve(__dirname, 'src', 'app', 'client', 'index.html'),
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css',
+      filename: 'server.[contenthash].css',
     }),
   ],
   module: {
@@ -69,5 +69,11 @@ module.exports = {
         },
       },
     ],
+  },
+  resolve: {
+    alias: {
+      '@styles': path.resolve(__dirname, 'src/app/client/UI'),
+      '@pages': path.resolve(__dirname, 'src/pages/UI'),
+    },
   },
 };

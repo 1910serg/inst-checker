@@ -4,16 +4,14 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   target: 'node',
   mode: 'production',
-  entry: {
-    server: path.resolve(__dirname, 'src', 'app', 'server', 'index.js'),
-  },
+  entry: [path.resolve(__dirname, 'src', 'app', 'server', 'index.js')],
   output: {
-    filename: '[name].js',
+    filename: 'server.js',
     path: path.resolve(__dirname, 'build'),
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css',
+      filename: 'server.[contenthash].css',
     }),
   ],
   module: {
@@ -48,5 +46,11 @@ module.exports = {
         },
       },
     ],
+  },
+  resolve: {
+    alias: {
+      '@styles': path.resolve(__dirname, 'src/app/client/UI'),
+      '@pages': path.resolve(__dirname, 'src/pages/UI'),
+    },
   },
 };

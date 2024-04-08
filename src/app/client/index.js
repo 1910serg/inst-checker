@@ -7,7 +7,6 @@ import '@babel/polyfill';
 import App from './UI/App.js';
 
 import './index.html';
-import '../styles/index.scss';
 
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);

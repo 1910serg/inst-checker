@@ -1,0 +1,10 @@
+@import '@styles/colors';
+@import '@styles/breakpoints';
+
+.test {
+  background-color: $white-blue;
+
+  @include breakpoint(desktop) {
+    background-color: $orange;
+  }
+}
