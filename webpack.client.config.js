@@ -43,7 +43,17 @@ module.exports = {
         test: /\.(c|sa|sc)ss$/i,
         use: [
           isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: isDevMode
+                  ? '[path]__[name]__[local]--[hash:base64:5]'
+                  : '[hash:base64:5]',
+              },
+            },
+          },
+          'sass-loader',
           {
             loader: 'postcss-loader',
             options: {
@@ -52,7 +62,6 @@ module.exports = {
               },
             },
           },
-          'sass-loader',
         ],
       },
       {
@@ -72,7 +81,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      '@styles': path.resolve(__dirname, 'src/app/client/UI'),
+      '@commonStyles': path.resolve(__dirname, 'src/app/client/styles'),
       '@pages': path.resolve(__dirname, 'src/pages/UI'),
     },
   },
