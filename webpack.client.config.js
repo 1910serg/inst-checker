@@ -77,11 +77,16 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
+        type: 'asset',
+      },
     ],
   },
   resolve: {
     alias: {
-      '@commonStyles': path.resolve(__dirname, 'src/app/client/styles'),
+      '@breakpoints': path.resolve(__dirname, 'src/app/client/UI/breakpoints'),
+      '@colors': path.resolve(__dirname, 'src/app/client/UI/colors'),
       '@pages': path.resolve(__dirname, 'src/pages/UI'),
     },
   },
