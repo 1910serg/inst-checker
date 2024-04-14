@@ -3,46 +3,41 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const mode = process.env.NODE_ENV || 'development';
-
 const isDevMode = mode === 'development';
 
-const target = isDevMode ? 'web' : 'browserslist';
-
 module.exports = {
-  mode,
-  target,
+  mode: isDevMode ? 'development' : 'production',
+  entry: {
+    client: path.resolve(__dirname, 'src', 'app', 'client', 'index.js'),
+  },
+  output: {
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'build'),
+  },
   devServer: {
     port: 3000,
     open: true,
     hot: true,
   },
-  entry: [
-    '@babel/polyfill',
-    path.resolve(__dirname, 'src', 'app', 'client', 'index.js'),
-  ],
-  output: {
-    filename: 'server.js',
-    path: path.resolve(__dirname, 'build'),
-    clean: true,
-  },
+  devtool: isDevMode ? 'source-map' : false,
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src', 'app', 'client', 'index.html'),
+      minify: {
+        removeComments: !isDevMode,
+        collapseWhitespace: !isDevMode,
+      },
     }),
     new MiniCssExtractPlugin({
-      filename: 'server.[contenthash].css',
+      filename: 'client.[contenthash].css',
     }),
   ],
   module: {
     rules: [
       {
-        test: /\.html$/i,
-        loader: 'html-loader',
-      },
-      {
         test: /\.(c|sa|sc)ss$/i,
         use: [
-          isDevMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
@@ -85,9 +80,10 @@ module.exports = {
   },
   resolve: {
     alias: {
-      '@breakpoints': path.resolve(__dirname, 'src/app/client/UI/breakpoints'),
-      '@colors': path.resolve(__dirname, 'src/app/client/UI/colors'),
+      '@breakpoints': path.resolve(__dirname, 'src/app/UI/App/breakpoints'),
+      '@colors': path.resolve(__dirname, 'src/app/UI/App/colors'),
       '@pages': path.resolve(__dirname, 'src/pages/UI'),
     },
+    extensions: ['.js', '.jsx', '.scss', '.json'],
   },
 };

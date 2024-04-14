@@ -1,14 +1,22 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const nodeExternals = require('webpack-node-externals');
+
+const mode = process.env.NODE_ENV || 'development';
+const isDevMode = mode === 'development';
 
 module.exports = {
-  target: 'node',
-  mode: 'production',
-  entry: [path.resolve(__dirname, 'src', 'app', 'server', 'index.js')],
+  mode: isDevMode ? 'development' : 'production',
+  entry: {
+    server: path.resolve(__dirname, 'src', 'app', 'server', 'index.js'),
+  },
   output: {
-    filename: 'server.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'build'),
   },
+  devtool: isDevMode ? 'source-map' : false,
+  target: 'node',
+  externals: [nodeExternals()],
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'server.[contenthash].css',
@@ -24,7 +32,9 @@ module.exports = {
             loader: 'css-loader',
             options: {
               modules: {
-                localIdentName: '[hash:base64:5]',
+                localIdentName: isDevMode
+                  ? '[path]__[name]__[local]--[hash:base64:5]'
+                  : '[hash:base64:5]',
               },
             },
           },
@@ -60,9 +70,10 @@ module.exports = {
   },
   resolve: {
     alias: {
-      '@breakpoints': path.resolve(__dirname, 'src/app/client/UI/breakpoints'),
-      '@colors': path.resolve(__dirname, 'src/app/client/UI/colors'),
+      '@breakpoints': path.resolve(__dirname, 'src/app/UI/App/breakpoints'),
+      '@colors': path.resolve(__dirname, 'src/app/UI/App/colors'),
       '@pages': path.resolve(__dirname, 'src/pages/UI'),
     },
+    extensions: ['.js', '.jsx', '.scss', '.json'],
   },
 };

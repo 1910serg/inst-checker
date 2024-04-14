@@ -1,17 +1,17 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 
-import App from '../../client/UI/App';
+import App from '../../UI/App';
 
 /**
  * Возвращает строку с приложением
  *
- * @returns {String} html
+ * @returns {String} appString
  */
 export function renderApp() {
   const app = React.createElement(App);
 
-  const html = ReactDOMServer.renderToString(app);
+  const appString = ReactDOMServer.renderToString(app);
 
-  return html;
+  return appString;
 }

@@ -1,13 +1,13 @@
 {
   "name": "inst-checker",
   "version": "1.0.0",
-  "description": "This is my first serious project. We offer you Instagram checker - an application that is able to check for the presence of unfollowers in your profile. In the future, I plan to develop this project if my work finds a response.",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack serve --node-env development -c webpack.client.config.js",
-    "client:build": "webpack --node-env production -c webpack.client.config.js",
-    "server:build": "webpack -c webpack.server.config.js",
-    "ssr:build": "webpack --node-env production -c webpack.client.config.js && webpack -c webpack.server.config.js",
+    "client:dev": "webpack --node-env development -c webpack.client.js",
+    "client:prod": "webpack --node-env production -c webpack.client.js",
+    "server:dev": "webpack --node-env development -c webpack.server.js",
+    "server:prod": "webpack --node-env production -c webpack.server.js",
+    "dev": "nodemon --watch src --exec npm run server:dev && node build/server.js",
     "ssr": "node build/server.js",
     "clear": "rd /s /q build"
   },
@@ -23,6 +23,7 @@
     "html-loader": "4.2.0",
     "html-webpack-plugin": "5.5.3",
     "mini-css-extract-plugin": "2.7.6",
+    "nodemon": "^3.1.0",
     "postcss": "^8.4.38",
     "postcss-loader": "7.3.3",
     "postcss-preset-env": "8.5.1",
@@ -31,12 +32,15 @@
     "style-loader": "3.3.3",
     "webpack": "5.88.0",
     "webpack-cli": "5.1.4",
-    "webpack-dev-server": "4.15.1"
+    "webpack-dev-middleware": "^7.2.1",
+    "webpack-dev-server": "^4.15.1",
+    "webpack-hot-middleware": "^2.26.1"
   },
   "dependencies": {
     "@babel/polyfill": "7.12.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-router-dom": "^6.22.3",
     "webpack-node-externals": "3.0.0"
   }
 }

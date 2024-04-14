@@ -7,6 +7,8 @@ import { renderApp } from './lib/render-app';
 const app = express();
 const port = 3000;
 
+app.use('/', express.static(path.join(__dirname, 'build')));
+
 app.get('/', async (req, res) => {
   const html = await readHtmlSource();
   const appString = renderApp();
@@ -15,8 +17,6 @@ app.get('/', async (req, res) => {
 
   res.send(htmlWithReactApp);
 });
-
-app.use('/', express.static(path.join(__dirname)));
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
