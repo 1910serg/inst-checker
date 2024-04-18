@@ -1,35 +1,25 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const nodeExternals = require('webpack-node-externals');
 
-const mode = process.env.NODE_ENV || 'development';
-const isDevMode = mode === 'development';
+const { IS_DEV } = require('./env.js');
 
-module.exports = {
-  mode: isDevMode ? 'development' : 'production',
+const serverConfig = {
+  mode: IS_DEV ? 'development' : 'production',
   entry: {
-    client: path.resolve(__dirname, 'src', 'app', 'client', 'index.js'),
+    server: path.resolve(__dirname, '..', 'src', 'app', 'server', 'index.js'),
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, '..', 'build'),
+    publicPath: '/',
   },
-  devServer: {
-    port: 3000,
-    open: true,
-    hot: true,
-  },
-  devtool: isDevMode ? 'source-map' : false,
+  devtool: IS_DEV ? 'source-map' : false,
+  target: 'node',
+  externals: [nodeExternals()],
   plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'src', 'app', 'client', 'index.html'),
-      minify: {
-        removeComments: !isDevMode,
-        collapseWhitespace: !isDevMode,
-      },
-    }),
     new MiniCssExtractPlugin({
-      filename: 'client.[contenthash].css',
+      filename: 'server.[contenthash].css',
     }),
   ],
   module: {
@@ -42,7 +32,7 @@ module.exports = {
             loader: 'css-loader',
             options: {
               modules: {
-                localIdentName: isDevMode
+                localIdentName: IS_DEV
                   ? '[path]__[name]__[local]--[hash:base64:5]'
                   : '[hash:base64:5]',
               },
@@ -80,10 +70,24 @@ module.exports = {
   },
   resolve: {
     alias: {
-      '@breakpoints': path.resolve(__dirname, 'src/app/UI/App/breakpoints'),
-      '@colors': path.resolve(__dirname, 'src/app/UI/App/colors'),
-      '@pages': path.resolve(__dirname, 'src/pages/UI'),
+      '@breakpoints': path.resolve(
+        __dirname,
+        '..',
+        'src/app/UI/App/breakpoints'
+      ),
+      '@colors': path.resolve(
+        __dirname,
+        '..',
+        'src',
+        'app',
+        'UI',
+        'App',
+        'colors'
+      ),
+      '@pages': path.resolve(__dirname, '..', 'src', 'pages', 'UI'),
     },
     extensions: ['.js', '.jsx', '.scss', '.json'],
   },
 };
+
+module.exports = serverConfig;
