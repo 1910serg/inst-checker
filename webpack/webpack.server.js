@@ -6,20 +6,17 @@ const { IS_DEV } = require('./env.js');
 
 const serverConfig = {
   mode: IS_DEV ? 'development' : 'production',
-  entry: {
-    server: path.resolve(__dirname, '..', 'src', 'app', 'server', 'index.js'),
-  },
+  entry: path.resolve(__dirname, '..', 'src', 'app', 'server', 'index.js'),
   output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, '..', 'build'),
-    publicPath: '/',
+    path: path.resolve(__dirname, '..', 'dist'),
+    filename: 'server.js',
   },
   devtool: IS_DEV ? 'source-map' : false,
   target: 'node',
   externals: [nodeExternals()],
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'server.[contenthash].css',
+      filename: 'build/styles.css',
     }),
   ],
   module: {
@@ -63,10 +60,31 @@ const serverConfig = {
         },
       },
       {
-        test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
-        type: 'asset',
+        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/, /\.pdf$/],
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'assets/',
+            },
+          },
+        ],
       },
     ],
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        default: false,
+        vendors: false,
+
+        vendor: {
+          chunks: 'all',
+          name: 'vendor',
+        },
+      },
+    },
   },
   resolve: {
     alias: {

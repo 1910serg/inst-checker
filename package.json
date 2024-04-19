@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "dev": "webpack --config webpack.config.js",
     "client:dev": "webpack --node-env development -c webpack/webpack.client.js",
     "client:prod": "webpack --node-env production -c webpack/webpack.client.js",
     "server:dev": "webpack --node-env development -c webpack/webpack.server.js",
     "server:prod": "webpack --node-env production -c webpack/webpack.server.js",
-    "ssr": "node build/server.js",
-    "clear": "rimraf build"
+    "ssr": "node dist/server.js",
+    "clear": "rimraf dist"
   },
   "author": "Sergey Grankov",
   "license": "ISC",
@@ -20,6 +21,7 @@
     "cross-env": "^7.0.3",
     "css-loader": "6.8.1",
     "express": "^4.19.2",
+    "file-loader": "^6.2.0",
     "html-loader": "4.2.0",
     "html-webpack-plugin": "5.5.3",
     "mini-css-extract-plugin": "2.7.6",

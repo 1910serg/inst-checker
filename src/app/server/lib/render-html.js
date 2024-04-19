@@ -15,7 +15,7 @@ export async function readHtmlSource() {
   }
 
   const fileContent = await fs.readFile(
-    path.resolve('build', 'index.html'),
+    path.resolve('dist', 'index.html'),
     'utf8'
   );
 

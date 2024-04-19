@@ -7,9 +7,9 @@ import './index.scss';
 
 export default function App() {
   return (
-    <>
+    <div>
       <General />
       <AboutMe />
-    </>
+    </div>
   );
 }

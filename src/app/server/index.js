@@ -13,10 +13,8 @@ app.get('/', async (req, res) => {
   const html = await readHtmlSource();
   const appString = renderApp();
 
-  const htmlWithReactApp = html.replace(
-    '<div id="root">{{APP}}</div>',
-    `<div id="root">${appString}</div>`
-  );
+  const htmlWithReactApp = html.replace('{{APP}}', appString);
+
   res.send(htmlWithReactApp);
 });
 
