@@ -1,5 +1,4 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const { IS_DEV } = require('./env.js');
@@ -13,13 +12,6 @@ const clientConfig = {
   },
   devtool: IS_DEV ? 'source-map' : false,
   plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, '..', 'public', 'index.html'),
-      minify: {
-        removeComments: !IS_DEV,
-        collapseWhitespace: !IS_DEV,
-      },
-    }),
     new MiniCssExtractPlugin({
       filename: 'build/styles.css',
     }),
